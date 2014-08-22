@@ -1,0 +1,34 @@
+{
+  "name": "br-validations",
+  "version": "0.0.1",
+  "description": "A library with most common brazilian fields validations",
+  "id": "/br-validations",
+  "main": "src/br-validations.js",
+  "repository" :{ 
+    "type" : "git",
+    "url" : "https://github.com/the-darc/br-validations.git"
+  },
+  "bugs": { 
+    "url" : "https://github.com/the-darc/br-validations/issues"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "keywords": [
+    "validator",
+    "validation"
+  ],
+  "author": {
+    "name": "Daniel Campos",
+    "email": "darc.tec@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.7.0",
+    "gulp-jshint": "^1.6.1",
+    "gulp-spawn-mocha": "^0.1.4",
+    "jshint-stylish": "^0.2.0",
+    "should": "^4.0.1"
+  }
+}
