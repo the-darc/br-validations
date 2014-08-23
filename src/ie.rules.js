@@ -1,5 +1,5 @@
-function _debug(msg) {
-	console.log(msg);
+function _debug(/*msg*/) {
+	// console.log(msg);
 }
 
 var algorithmSteps = {
@@ -35,10 +35,10 @@ var algorithmSteps = {
 			var sum = this.normalSum(handledStr, pesos);
 			var ref = parseInt(handledStr.join(''));
 			if (ref >= 030000010 && ref <= 030170009) {
-				return sum + 5
+				return sum + 5;
 			}
 			if (ref >= 030170010 && ref <= 030190229) {
-				return sum + 9
+				return sum + 9;
 			}
 			return sum;
 		}
@@ -77,7 +77,7 @@ var algorithmSteps = {
 		apSpec: function(rest, handledStr) {
 			var ref = parseInt(handledStr.join(''));
 			if (rest === 0) {
-				return ref >= 030170010 && ref <= 030190229 ? 1 : 0
+				return ref >= 030170010 && ref <= 030190229 ? 1 : 0;
 			}
 			return rest === 1 ? 0 : 11 - rest;
 		},
@@ -136,7 +136,7 @@ function validateIE(value, rule) {
 
 var ieRules = {
 	'PE': [{ 
-		//DVerf.: 2;	DIG1: 	Multiplique PESOS;	SOMA PRODUTOS;	%11;	Digito=11-RESTO;	SeMaior9:0 		
+		//DVerf.: 2;	DIG1: 	Multiplique PESOS;	SOMA PRODUTOS;	%11;	Digito=11-RESTO;	SeMaior9:0 
 		//          	DIG2: NovosPesos;	ConsideraPrimDigitoVerf;	=PE1;
 		//mask: new StringMask('0000000-00'),
 		chars: 9,
