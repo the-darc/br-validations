@@ -1,7 +1,7 @@
 {
   "name": "br-validations",
   "version": "0.0.1",
-  "description": "A library with most common brazilian fields validations",
+  "description": "A library of validations applicable to various Brazilian data",
   "id": "/br-validations",
   "main": "src/br-validations.js",
   "repository" :{ 
