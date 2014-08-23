@@ -1,7 +1,7 @@
 {
   "name": "br-validations",
   "version": "0.0.1",
-  "description": "A library of validations applicable to various Brazilian data",
+  "description": "A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others",
   "id": "/br-validations",
   "main": "src/br-validations.js",
   "repository" :{ 
