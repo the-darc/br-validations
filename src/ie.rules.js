@@ -30,6 +30,17 @@ var algorithmSteps = {
 				sum += mult%10 + parseInt(mult/10);
 			}
 			return sum;
+		},
+		apSpec: function(handledStr, pesos) {
+			var sum = this.normalSum(handledStr, pesos);
+			var ref = parseInt(handledStr.join(''));
+			if (ref >= 030000010 && ref <= 030170009) {
+				return sum + 5
+			}
+			if (ref >= 030170010 && ref <= 030190229) {
+				return sum + 9
+			}
+			return sum;
 		}
 	},
 	rest: {
@@ -38,6 +49,9 @@ var algorithmSteps = {
 		},
 		mod10: function(sum) {
 			return sum%10;
+		},
+		mod9: function(sum) {
+			return sum%9;
 		}
 	},
 	expectedDV: {
@@ -52,17 +66,34 @@ var algorithmSteps = {
 		},
 		mod10: function(rest) {
 			return rest%10;
+		},
+		goSpec: function(rest, handledStr) {
+			var ref = parseInt(handledStr.join(''));
+			if (rest === 1) {
+				return ref >= 101031050 && ref <= 101199979 ? 1 : 0;
+			}
+			return rest === 0 ? 0 : 11 - rest;
+		},
+		apSpec: function(rest, handledStr) {
+			var ref = parseInt(handledStr.join(''));
+			if (rest === 0) {
+				return ref >= 030170010 && ref <= 030190229 ? 1 : 0
+			}
+			return rest === 1 ? 0 : 11 - rest;
+		},
+		voidFn: function(rest) {
+			return rest;
 		}
 	}
 };
 
 
 /**
-options {
-    pesos: Array of values used to operate in sum step
-    dvPos: Position of the DV to validate considering the handledStr
-    algorithmSteps: The four DV's validation algorithm steps names
-}
+ * options {
+ *     pesos: Array of values used to operate in sum step
+ *     dvPos: Position of the DV to validate considering the handledStr
+ *     algorithmSteps: The four DV's validation algorithm steps names
+ * }
  */
 function validateDV(value, options) {
 	var steps = options.algorithmSteps;
@@ -83,7 +114,7 @@ function validateDV(value, options) {
 	var currentDV = parseInt(handledStr[options.dvpos]);
 
 	// Step 04: Expected DV calculation
-	var expectedDV = algorithmSteps.expectedDV[steps[3]](rest, options);
+	var expectedDV = algorithmSteps.expectedDV[steps[3]](rest, handledStr);
 	_debug('      currentDV: ' + currentDV + '    expectedDV: ' + expectedDV);
 
 	// Fixed step: DV verification
@@ -470,29 +501,68 @@ var ieRules = {
 		}],
 		validate: function(value) { return validateIE(value, this); }
 	}],
-
-
-
-
-	'TO': [{																	// Dvref.: 1;	DIG1: =PE1;
-		// {mask: new StringMask('00000000000'), uf: 'TOCANTINS'}				// [!] Digitos 3 e 4 não considerados no cáculo do DV
-	}],																		// [!] Digitos 3 e 4 podem ser somente iguais aos pares: [01], [02], [03] ou [99]
-	'AL': [{																	// Dvref.: 1;	DIG1: =RN;
-		// {mask: new StringMask('000000000'), uf: 'ALAGOAS'}					// [!] Terceiro tem que ser: 0, 3, 5, 7 ou 8
-	}],																		// [!] Dois primeiros são sempre 24
-
+	'TO': [{
+		// Dvref.: 1;	DIG1: =PE1; [!] Digitos 3 e 4 não considerados no cáculo do DV
+		// {mask: new StringMask('00000000000'), [!] Digitos 3 e 4 devem ser: [01], [02], [03] ou [99]
+		chars: 11,
+		match: /^[0-9]{2}((0[123])|(99))/,
+		dvs: [{
+			dvpos: 10,
+			pesos: [9,8,0,0,7,6,5,4,3,2],
+			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+		}],
+		validate: function(value) { return validateIE(value, this); }
+	}],
+	'AL': [{
+		// Dvref.: 1;	DIG1: =RN; [!] Terceiro tem que ser: 0, 3, 5, 7 ou 8
+		// {mask: new StringMask('000000000') // [!] Dois primeiros são sempre 24
+		chars: 9,
+		match: /^24[03578]/,
+		dvs: [{
+			dvpos: 8,
+			pesos: [9,8,7,6,5,4,3,2],
+			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+		}],
+		validate: function(value) { return validateIE(value, this); }
+	}],
 	'RR': [{
-		// {mask: new StringMask('00000000-0'), uf: 'RORAIMA'}					// Dvref.: 1;	DIG1: DV calculado pelo MOD9
-	}],																		// [!] Dois primeiros são sempre 24
+		// Dvref.: 1;	DIG1: DV calculado pelo MOD9 [!] Dois primeiros são sempre 24
+		// {mask: new StringMask('00000000-0')
+		chars: 9,
+		match: /^24/,
+		dvs: [{
+			dvpos: 8,
+			pesos: [1,2,3,4,5,6,7,8],
+			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod9', 'voidFn']
+		}],
+		validate: function(value) { return validateIE(value, this); }
+	}],																		
 
 	'GO': [{
 		// Dverf.: 1;	DIG1: ~PE: Quando resto igual a 11, DV pode ser 0 ou 1 dependendo da faixa da I.E.
 		// {mask: new StringMask('00.000.000-0'), uf: 'GOIÁS'}
+		chars: 9,
+		match: /^1[015]/,
+		dvs: [{
+			dvpos: 8,
+			pesos: [9,8,7,6,5,4,3,2],
+			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'goSpec']
+		}],
+		validate: function(value) { return validateIE(value, this); }
 	}],
 
 	'AP': [{
-		// {mask: new StringMask('000000000'), uf: 'AMAPÁ'}					// Dvref.: 1;	DIG1: ALG PROPRIO;
-	}],
+		// Dvref.: 1;	DIG1: ALG PROPRIO;
+		// {mask: new StringMask('000000000')
+		chars: 9,
+		match: /^03/,
+		dvs: [{
+			dvpos: 8,
+			pesos: [9,8,7,6,5,4,3,2],
+			algorithmSteps: ['onlyNumbers', 'apSpec', 'mod11', 'apSpec']
+		}],
+		validate: function(value) { return validateIE(value, this); }
+	}]
 };
 
 

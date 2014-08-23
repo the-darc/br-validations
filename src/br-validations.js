@@ -32,7 +32,6 @@ var BrV = (function() {
 		};
 	};
 
-
 	return {
 		ie: IE
 	};

@@ -465,5 +465,128 @@ describe('br-validations', function(){
 				done();
 			});
 		});
+		describe('- TO', function() {
+			var uf = 'TO';
+			it('should validate 29010227836', function(done) {
+				should(BrV.ie(uf).validate('29010227836')).be.true;
+				done();
+			});
+			it('should invalidate 29010237336', function(done) {
+				should(BrV.ie(uf).validate('29010237336')).be.false;
+				done();
+			});
+			it('should invalidate 29090227836', function(done) {
+				should(BrV.ie(uf).validate('29090227836')).be.false;
+				done();
+			});
+		});
+		describe('- AL', function() {
+			var uf = 'AL';
+			it('should validate 240000048', function(done) {
+				should(BrV.ie(uf).validate('240000048')).be.true;
+				done();
+			});
+			it('should validate 240273044', function(done) {
+				should(BrV.ie(uf).validate('240273044')).be.true;
+				done();
+			});
+			it('should invalidate 241178045', function(done) {
+				should(BrV.ie(uf).validate('241178045')).be.false;
+				done();
+			});
+			it('should invalidate 213178044', function(done) {
+				should(BrV.ie(uf).validate('213178044')).be.false;
+				done();
+			});
+			it('should invalidate 240178040', function(done) {
+				should(BrV.ie(uf).validate('240178040')).be.false;
+				done();
+			});
+		});
+		describe('- RR', function() {
+			var uf = 'RR';
+			it('should validate 24006628-1', function(done) {
+				should(BrV.ie(uf).validate('24006628-1')).be.true;
+				done();
+			});
+			it('should validate 24001755-6', function(done) {
+				should(BrV.ie(uf).validate('24001755-6')).be.true;
+				done();
+			});
+			it('should validate 24003429-0', function(done) {
+				should(BrV.ie(uf).validate('24003429-0')).be.true;
+				done();
+			});
+			it('should validate 24001360-3', function(done) {
+				should(BrV.ie(uf).validate('24001360-3')).be.true;
+				done();
+			});
+			it('should validate 24008266-8', function(done) {
+				should(BrV.ie(uf).validate('24008266-8')).be.true;
+				done();
+			});
+			it('should invalidate 24002676-8', function(done) {
+				should(BrV.ie(uf).validate('24002676-8')).be.false;
+				done();
+			});
+		});
+		describe('- GO', function() {
+			var uf = 'GO';
+			it('should validate 10.987.654-7', function(done) {
+				should(BrV.ie(uf).validate('10.987.654-7')).be.true;
+				done();
+			});
+			it('should validate 11.094.402-0', function(done) {
+				should(BrV.ie(uf).validate('11.094.402-0')).be.true;
+				done();
+			});
+			it('should validate 10.115.996-1', function(done) {
+				should(BrV.ie(uf).validate('10.115.996-1')).be.true;
+				done();
+			});
+			it('should validate 10.113.995-0', function(done) {
+				should(BrV.ie(uf).validate('10.113.995-0')).be.true;
+				done();
+			});
+			it('should invalidate 10.957.654-7', function(done) {
+				should(BrV.ie(uf).validate('10.957.654-7')).be.false;
+				done();
+			});
+		});
+		describe('- AP', function() {
+			var uf = 'AP';
+			it('should validate 030123459', function(done) {
+				should(BrV.ie(uf).validate('030123459')).be.true;
+				done();
+			});
+			it('should validate 030183458', function(done) {
+				should(BrV.ie(uf).validate('030183458')).be.true;
+				done();
+			});
+			it('should validate 030173452', function(done) {
+				should(BrV.ie(uf).validate('030173452')).be.true;
+				done();
+			});
+			it('should validate 030153455', function(done) {
+				should(BrV.ie(uf).validate('030153455')).be.true;
+				done();
+			});
+			it('should validate 030193451', function(done) {
+				should(BrV.ie(uf).validate('030193451')).be.true;
+				done();
+			});
+			it('should validate 030223458', function(done) {
+				should(BrV.ie(uf).validate('030223458')).be.true;
+				done();
+			});
+			it('should validate 037123459', function(done) {
+				should(BrV.ie(uf).validate('037123459')).be.true;
+				done();
+			});
+			it('should invalidate 031123459', function(done) {
+				should(BrV.ie(uf).validate('031123459')).be.false;
+				done();
+			});
+		});
 	});
 });
