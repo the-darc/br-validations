@@ -1,3 +1,39 @@
+/**
+ * br-validations
+ * A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others
+ * @version v0.1.0
+ * @link http://github.com/the-darc/br-validations
+ * @license MIT
+ */
+(function () {
+  var root = this;
+var IE = function(uf) {
+	if (!(this instanceof IE)) {
+		return new IE(uf);
+	}
+
+	this.rules = IErules[uf] || [];
+	this.rule;
+	IE.prototype._defineRule = function(value) {
+		this.rule = undefined;
+		for (var r = 0; r < this.rules.length && this.rule === undefined; r++) {
+			var str = value.replace(/[^\d]/g,'');
+			var ruleCandidate = this.rules[r];
+			if (str.length === ruleCandidate.chars && (!ruleCandidate.match || ruleCandidate.match.test(value))) {
+				this.rule = ruleCandidate;
+			}
+		}
+		return !!this.rule;
+	};
+
+	IE.prototype.validate = function(value) {
+		if (!value || !this._defineRule(value)) {
+			return false;
+		}
+		return this.rule.validate(value);
+	};
+};
+
 var IErules = {};
 
 var algorithmSteps = {
@@ -534,3 +570,17 @@ IErules.AP = [{
 	}],
 	validate: function(value) { return validateIE(value, this); }
 }];
+
+var BrV = {
+	ie: IE
+};
+var objectTypes = {
+	'function': true,
+	'object': true
+};
+if (objectTypes[typeof module]) {
+	module.exports = BrV;	
+} else {
+	root.BrV = BrV;
+}
+}.call(this));

@@ -1,5 +1,5 @@
 var should = require('should'),
-	BrV = require('./br-validations');
+	BrV = require('../releases/br-validations.min');
 
 describe('br-validations', function(){
 	describe('I.E. ', function() {
