@@ -14,7 +14,7 @@ var path = {
 	}
 }
 
-gulp.task('build', function() {
+gulp.task('build', function(done) {
 	var pkg = require('./package.json');
 
 	var header = ['/**',
@@ -30,7 +30,8 @@ gulp.task('build', function() {
 
 	var footer = ['',
 		'var BrV = {',
-		'	ie: IE',
+		'   ie: IE,',
+		'   cpf: CPF',
 		'};',
 		'var objectTypes = {',
 		'	\'function\': true,',
@@ -52,12 +53,15 @@ gulp.task('build', function() {
 		.pipe(plugins.uglify())
 		.pipe(plugins.concat('br-validations.min.js'))
 		.pipe(gulp.dest('./releases'));
+
+	done();
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function(done) {
 	gulp.src(path.src.files)
 	.pipe(plugins.jshint('.jshintrc'))
 	.pipe(plugins.jshint.reporter(jshintReporter));
+	done();
 });
 
 gulp.task('runtestdot', function() {
@@ -77,9 +81,9 @@ gulp.task('runtest', function() {
 });
 
 gulp.task('default', ['jshint', 'build', 'runtestdot'], function() {
-    gulp.watch(path.src.files, ['jshint', 'runtestdot']);
+    gulp.watch(path.src.files, ['jshint', 'build', 'runtestdot']);
 });
 
 gulp.task('test', ['jshint', 'build', 'runtest'], function() {
-    gulp.watch(path.src.files, ['jshint', 'runtest']);
+    gulp.watch(path.src.files, ['jshint', 'build', 'runtest']);
 });
