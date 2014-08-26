@@ -12,7 +12,7 @@ var IE = function(uf) {
 		return new IE(uf);
 	}
 
-	this.rules = ieRules[uf] || [];
+	this.rules = IErules[uf] || [];
 	this.rule;
 	IE.prototype._defineRule = function(value) {
 		this.rule = undefined;
@@ -33,6 +33,8 @@ var IE = function(uf) {
 		return this.rule.validate(value);
 	};
 };
+
+var IErules = {};
 
 var algorithmSteps = {
 	handleStr: {
@@ -162,388 +164,412 @@ function validateIE(value, rule) {
 	return true;
 }
 
-var ieRules = {
-	'PE': [{ 
-		//mask: new StringMask('0000000-00'),
-		chars: 9,
-		dvs: [{
-			dvpos: 7,
-			pesos: [8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	},{ 
-		// mask: new StringMask('00.0.000.0000000-0'),
-		chars: 14,
-		pesos: [[1,2,3,4,5,9,8,7,6,5,4,3,2]],
-		dvs: [{
-			dvpos: 13,
-			pesos: [5,4,3,2,1,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11v2']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}],
-	'RS': [{
-		// mask: new StringMask('000/0000000'),
-		chars: 10,
-		dvs: [{
-			dvpos: 9,
-			pesos: [2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}],
-	'AC': [{
-		// mask: new StringMask('00.000.000/000-00'),
-		chars: 13,
-		match: /^01/,
-		dvs: [{
-			dvpos: 11,
-			pesos: [4,3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 12,
-			pesos: [5,4,3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}],
-	'MG': [{
-		// mask: new StringMask('000.000.000/0000'),
-		chars: 13,
-		dvs: [{
-			dvpos: 12,
-			pesos: [1,2,1,2,1,2,1,2,1,2,1,2],
-			algorithmSteps: ['mgSpec', 'individualSum', 'mod10', 'minusRestOf10']
-		},{
-			dvpos: 12,
-			pesos: [3,2,11,10,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}],
-	'SP': [{
-		// mask: new StringMask('000.000.000.000'),
-		chars: 12,
-		match: /^[0-9]/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [1,3,4,5,6,7,8,10],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
-		},{
-			dvpos: 11,
-			pesos: [3,2,10,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+IErules.PE = [{
+	//mask: new StringMask('0000000-00'),
+	chars: 9,
+	dvs: [{
+		dvpos: 7,
+		pesos: [8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	},{
-		// mask: new StringMask('P-00000000.0/000')
-		chars: 12,
-		match: /^P/i,
-		dvs: [{
-			dvpos: 8,
-			pesos: [1,3,4,5,6,7,8,10],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'DF': [{
-		// mask: new StringMask('00000000000-00'),
-		chars: 13,
-		dvs: [{
-			dvpos: 11,
-			pesos: [4,3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 12,
-			pesos: [5,4,3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{ 
+	// mask: new StringMask('00.0.000.0000000-0'),
+	chars: 14,
+	pesos: [[1,2,3,4,5,9,8,7,6,5,4,3,2]],
+	dvs: [{
+		dvpos: 13,
+		pesos: [5,4,3,2,1,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11v2']
 	}],
-	'ES': [{
-		// mask: new StringMask('000.000.00-0')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.RS = [{
+	// mask: new StringMask('000/0000000'),
+	chars: 10,
+	dvs: [{
+		dvpos: 9,
+		pesos: [2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'BA': [{
-		// mask: new StringMask('000000-00')
-		chars: 8,
-		match: /^[0123458]/,
-		dvs: [{
-			dvpos: 7,
-			pesos: [7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
-		},{
-			dvpos: 6,
-			pesos: [8,7,6,5,4,3,0,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.AC = [{
+	// mask: new StringMask('00.000.000/000-00'),
+	chars: 13,
+	match: /^01/,
+	dvs: [{
+		dvpos: 11,
+		pesos: [4,3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	},{
-		chars: 8,
-		match: /^[679]/,
-		dvs: [{
-			dvpos: 7,
-			pesos: [7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 6,
-			pesos: [8,7,6,5,4,3,0,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+		dvpos: 12,
+		pesos: [5,4,3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.MG = [{
+	// mask: new StringMask('000.000.000/0000'),
+	chars: 13,
+	dvs: [{
+		dvpos: 12,
+		pesos: [1,2,1,2,1,2,1,2,1,2,1,2],
+		algorithmSteps: ['mgSpec', 'individualSum', 'mod10', 'minusRestOf10']
 	},{
-		// mask: new StringMask('0000000-00')
-		chars: 9,
-		match: /^[0-9][0123458]/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
-		},{
-			dvpos: 7,
-			pesos: [9,8,7,6,5,4,3,0,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+		dvpos: 12,
+		pesos: [3,2,11,10,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.SP = [{
+	// mask: new StringMask('000.000.000.000'),
+	chars: 12,
+	match: /^[0-9]/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [1,3,4,5,6,7,8,10],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
 	},{
-		chars: 9,
-		match: /^[0-9][679]/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 7,
-			pesos: [9,8,7,6,5,4,3,0,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+		dvpos: 11,
+		pesos: [3,2,10,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
 	}],
-	'AM': [{
-		//mask: new StringMask('00.000.000-0')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{
+	// mask: new StringMask('P-00000000.0/000')
+	chars: 12,
+	match: /^P/i,
+	dvs: [{
+		dvpos: 8,
+		pesos: [1,3,4,5,6,7,8,10],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'mod10']
 	}],
-	'RN': [{
-		// {mask: new StringMask('00.000.000-0')
-		chars: 9,
-		match: /^20/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.DF = [{
+	// mask: new StringMask('00000000000-00'),
+	chars: 13,
+	dvs: [{
+		dvpos: 11,
+		pesos: [4,3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	},{
-		// {mask: new StringMask('00.0.000.000-0'), chars: 10}
-		chars: 10,
-		match: /^20/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [10,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+		dvpos: 12,
+		pesos: [5,4,3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'RO': [{
-		// mask: new StringMask('0000000000000-0')
-		chars: 14,
-		dvs: [{
-			dvpos: 13,
-			pesos: [6,5,4,3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.ES = [{
+	// mask: new StringMask('000.000.00-0')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'PR': [{
-		// mask: new StringMask('00000000-00')
-		chars: 10,
-		dvs: [{
-			dvpos: 8,
-			pesos: [3,2,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		},{
-			dvpos: 9,
-			pesos: [4,3,2,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.BA = [{
+	// mask: new StringMask('000000-00')
+	chars: 8,
+	match: /^[0123458]/,
+	dvs: [{
+		dvpos: 7,
+		pesos: [7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
+	},{
+		dvpos: 6,
+		pesos: [8,7,6,5,4,3,0,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
 	}],
-	'SC': [{
-		// {mask: new StringMask('000.000.000'), uf: 'SANTA CATARINA'}
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{
+	chars: 8,
+	match: /^[679]/,
+	dvs: [{
+		dvpos: 7,
+		pesos: [7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	},{
+		dvpos: 6,
+		pesos: [8,7,6,5,4,3,0,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'RJ': [{
-		// {mask: new StringMask('00.000.00-0'), uf: 'RIO DE JANEIRO'}
-		chars: 8,
-		dvs: [{
-			dvpos: 7,
-			pesos: [2,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{
+	// mask: new StringMask('0000000-00')
+	chars: 9,
+	match: /^[0-9][0123458]/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
+	},{
+		dvpos: 7,
+		pesos: [9,8,7,6,5,4,3,0,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod10', 'minusRestOf10']
 	}],
-	'PA': [{
-		// {mask: new StringMask('00-000000-0')
-		chars: 9,
-		match: /^15/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{
+	chars: 9,
+	match: /^[0-9][679]/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	},{
+		dvpos: 7,
+		pesos: [9,8,7,6,5,4,3,0,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'SE': [{
-		// {mask: new StringMask('00000000-0')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.AM = [{
+	//mask: new StringMask('00.000.000-0')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'PB': [{
-		// {mask: new StringMask('00000000-0')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.RN = [{
+	// {mask: new StringMask('00.000.000-0')
+	chars: 9,
+	match: /^20/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'CE': [{
-		// {mask: new StringMask('00000000-0')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+},{
+	// {mask: new StringMask('00.0.000.000-0'), chars: 10}
+	chars: 10,
+	match: /^20/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [10,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'PI': [{
-		// {mask: new StringMask('000000000')
-		chars: 9,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.RO = [{
+	// mask: new StringMask('0000000000000-0')
+	chars: 14,
+	dvs: [{
+		dvpos: 13,
+		pesos: [6,5,4,3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'MA': [{
-		// {mask: new StringMask('000000000')
-		chars: 9,
-		match: /^12/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.PR = [{
+	// mask: new StringMask('00000000-00')
+	chars: 10,
+	dvs: [{
+		dvpos: 8,
+		pesos: [3,2,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	},{
+		dvpos: 9,
+		pesos: [4,3,2,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'MT': [{
-		// {mask: new StringMask('0000000000-0')
-		chars: 11,
-		dvs: [{
-			dvpos: 10,
-			pesos: [3,2,9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.SC = [{
+	// {mask: new StringMask('000.000.000'), uf: 'SANTA CATARINA'}
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'MS': [{
-		// {mask: new StringMask('000000000')
-		chars: 9,
-		match: /^28/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.RJ = [{
+	// {mask: new StringMask('00.000.00-0'), uf: 'RIO DE JANEIRO'}
+	chars: 8,
+	dvs: [{
+		dvpos: 7,
+		pesos: [2,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'TO': [{
-		// {mask: new StringMask('00000000000'),
-		chars: 11,
-		match: /^[0-9]{2}((0[123])|(99))/,
-		dvs: [{
-			dvpos: 10,
-			pesos: [9,8,0,0,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.PA = [{
+	// {mask: new StringMask('00-000000-0')
+	chars: 9,
+	match: /^15/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'AL': [{
-		// {mask: new StringMask('000000000')
-		chars: 9,
-		match: /^24[03578]/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.SE = [{
+	// {mask: new StringMask('00000000-0')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'RR': [{
-		// {mask: new StringMask('00000000-0')
-		chars: 9,
-		match: /^24/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [1,2,3,4,5,6,7,8],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod9', 'voidFn']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}],																		
-	'GO': [{
-		// {mask: new StringMask('00.000.000-0')
-		chars: 9,
-		match: /^1[015]/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'goSpec']
-		}],
-		validate: function(value) { return validateIE(value, this); }
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.PB = [{
+	// {mask: new StringMask('00000000-0')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
-	'AP': [{
-		// {mask: new StringMask('000000000')
-		chars: 9,
-		match: /^03/,
-		dvs: [{
-			dvpos: 8,
-			pesos: [9,8,7,6,5,4,3,2],
-			algorithmSteps: ['onlyNumbers', 'apSpec', 'mod11', 'apSpec']
-		}],
-		validate: function(value) { return validateIE(value, this); }
-	}]
-};
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.CE = [{
+	// {mask: new StringMask('00000000-0')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.PI = [{
+	// {mask: new StringMask('000000000')
+	chars: 9,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.MA = [{
+	// {mask: new StringMask('000000000')
+	chars: 9,
+	match: /^12/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.MT = [{
+	// {mask: new StringMask('0000000000-0')
+	chars: 11,
+	dvs: [{
+		dvpos: 10,
+		pesos: [3,2,9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.MS = [{
+	// {mask: new StringMask('000000000')
+	chars: 9,
+	match: /^28/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.TO = [{
+	// {mask: new StringMask('00000000000'),
+	chars: 11,
+	match: /^[0-9]{2}((0[123])|(99))/,
+	dvs: [{
+		dvpos: 10,
+		pesos: [9,8,0,0,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.AL = [{
+	// {mask: new StringMask('000000000')
+	chars: 9,
+	match: /^24[03578]/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.RR = [{
+	// {mask: new StringMask('00000000-0')
+	chars: 9,
+	match: /^24/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [1,2,3,4,5,6,7,8],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod9', 'voidFn']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.GO = [{
+	// {mask: new StringMask('00.000.000-0')
+	chars: 9,
+	match: /^1[015]/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'goSpec']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
+
+IErules.AP = [{
+	// {mask: new StringMask('000000000')
+	chars: 9,
+	match: /^03/,
+	dvs: [{
+		dvpos: 8,
+		pesos: [9,8,7,6,5,4,3,2],
+		algorithmSteps: ['onlyNumbers', 'apSpec', 'mod11', 'apSpec']
+	}],
+	validate: function(value) { return validateIE(value, this); }
+}];
 
 var BrV = {
 	ie: IE

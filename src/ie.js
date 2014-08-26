@@ -3,7 +3,7 @@ var IE = function(uf) {
 		return new IE(uf);
 	}
 
-	this.rules = ieRules[uf] || [];
+	this.rules = IErules[uf] || [];
 	this.rule;
 	IE.prototype._defineRule = function(value) {
 		this.rule = undefined;
