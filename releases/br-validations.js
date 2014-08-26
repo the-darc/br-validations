@@ -1,3 +1,87 @@
+/**
+ * br-validations
+ * A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others
+ * @version v0.1.0
+ * @link http://github.com/the-darc/br-validations
+ * @license MIT
+ */
+(function () {
+  var root = this;
+var CNPJ = {};
+
+CNPJ.validate = function(c) {
+	var b = [6,5,4,3,2,9,8,7,6,5,4,3,2];
+	c = c.replace(/[^\d]/g,'').split('');
+	if(c.length !== 14) {
+		return false;
+	}
+
+	for (var i = 0, n = 0; i < 12; i++) {
+		n += c[i] * b[i+1];
+	}
+	n = 11 - n%11;
+	n = n >= 10 ? 0 : n;
+	if (parseInt(c[12]) !== n)  {
+		return false;
+	}
+
+	for (i = 0, n = 0; i <= 12; i++) {
+		n += c[i] * b[i];
+	}
+	n = 11 - n%11;
+	n = n >= 10 ? 0 : n;
+	if (parseInt(c[13]) !== n)  {
+		return false;
+	}
+	return true;
+};
+
+
+var CPF = {};
+
+CPF.validate = function(cpf) {
+	cpf = cpf.replace(/[^\d]+/g,'');
+	if (cpf === '' || cpf === '00000000000' || cpf.length !== 11) {
+		return false;
+	}
+	function validateDigit(digit) {
+		var add = 0;
+		var init = digit - 9;
+		for (var i = 0; i < 9; i ++) {
+			add += parseInt(cpf.charAt(i + init)) * (i+1);
+		}
+		return (add%11)%10 === parseInt(cpf.charAt(digit));
+	}
+	return validateDigit(9) && validateDigit(10);
+};
+
+var IE = function(uf) {
+	if (!(this instanceof IE)) {
+		return new IE(uf);
+	}
+
+	this.rules = IErules[uf] || [];
+	this.rule;
+	IE.prototype._defineRule = function(value) {
+		this.rule = undefined;
+		for (var r = 0; r < this.rules.length && this.rule === undefined; r++) {
+			var str = value.replace(/[^\d]/g,'');
+			var ruleCandidate = this.rules[r];
+			if (str.length === ruleCandidate.chars && (!ruleCandidate.match || ruleCandidate.match.test(value))) {
+				this.rule = ruleCandidate;
+			}
+		}
+		return !!this.rule;
+	};
+
+	IE.prototype.validate = function(value) {
+		if (!value || !this._defineRule(value)) {
+			return false;
+		}
+		return this.rule.validate(value);
+	};
+};
+
 var IErules = {};
 
 var algorithmSteps = {
@@ -534,3 +618,19 @@ IErules.AP = [{
 	}],
 	validate: function(value) { return validateIE(value, this); }
 }];
+
+var BrV = {
+   ie: IE,
+   cpf: CPF,
+   cnpj: CNPJ
+};
+var objectTypes = {
+	'function': true,
+	'object': true
+};
+if (objectTypes[typeof module]) {
+	module.exports = BrV;	
+} else {
+	root.BrV = BrV;
+}
+}.call(this));

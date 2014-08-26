@@ -111,7 +111,8 @@
         "angular": true,
         "before": true,
         "describe": true,
-        "it": true
+        "it": true,
+        "IErules": true
     },
     "predef"        : [         // Extra globals.
     ],
