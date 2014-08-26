@@ -36,11 +36,19 @@ See: [Conferência de Inscrições Estaduais](http://www.sintegra.gov.br/insc_es
  
 ### CPF ###
 
-__Not implemented yet__
+```javascript
+	var BrV = require('./br-validations');
+	var cpf = '219.841.712-08';
+	var isValid = BrV.cpf.validate(cpf);
+```
 
 ### CNPJ ###
 
-__Not implemented yet__
+```javascript
+	var BrV = require('./br-validations');
+	var cnpj = '10.157.471/0001-61';
+	var isValid = BrV.cnpj(uf).validate(cnpj);
+```
 
 ### RG ###
 
