@@ -1,6 +1,6 @@
 {
   "name": "br-validations",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others",
   "id": "/br-validations",
   "main": "releases/br-validations.js",
@@ -17,7 +17,10 @@
   },
   "keywords": [
     "validator",
-    "validation"
+    "validation",
+    "cpf",
+    "cnpj",
+    "inscrição estadual"
   ],
   "author": {
     "name": "Daniel Campos",
