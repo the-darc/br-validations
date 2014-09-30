@@ -31,11 +31,11 @@ var algorithmSteps = {
 		},
 		apSpec: function(handledStr, pesos) {
 			var sum = this.normalSum(handledStr, pesos);
-			var ref = parseInt(handledStr.join(''));
-			if (ref >= 030000010 && ref <= 030170009) {
+			var ref = handledStr.join('');
+			if (ref >= '030000010' && ref <= '030170009') {
 				return sum + 5;
 			}
-			if (ref >= 030170010 && ref <= 030190229) {
+			if (ref >= '030170010' && ref <= '030190229') {
 				return sum + 9;
 			}
 			return sum;
@@ -66,16 +66,16 @@ var algorithmSteps = {
 			return rest%10;
 		},
 		goSpec: function(rest, handledStr) {
-			var ref = parseInt(handledStr.join(''));
+			var ref = handledStr.join('');
 			if (rest === 1) {
-				return ref >= 101031050 && ref <= 101199979 ? 1 : 0;
+				return ref >= '101031050' && ref <= '101199979' ? 1 : 0;
 			}
 			return rest === 0 ? 0 : 11 - rest;
 		},
 		apSpec: function(rest, handledStr) {
-			var ref = parseInt(handledStr.join(''));
+			var ref = handledStr.join('');
 			if (rest === 0) {
-				return ref >= 030170010 && ref <= 030190229 ? 1 : 0;
+				return ref >= '030170010' && ref <= '030190229' ? 1 : 0;
 			}
 			return rest === 1 ? 0 : 11 - rest;
 		},
@@ -95,7 +95,7 @@ var algorithmSteps = {
  */
 function validateDV(value, options) {
 	var steps = options.algorithmSteps;
-	
+
 	// Step 01: Handle String
 	var handledStr = algorithmSteps.handleStr[steps[0]](value);
 
@@ -141,7 +141,7 @@ IErules.PE = [{
 		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
 	}],
 	validate: function(value) { return validateIE(value, this); }
-},{ 
+},{
 	// mask: new StringMask('00.0.000.0000000-0'),
 	chars: 14,
 	pesos: [[1,2,3,4,5,9,8,7,6,5,4,3,2]],
