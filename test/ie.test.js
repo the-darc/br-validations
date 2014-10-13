@@ -238,16 +238,16 @@ describe('br-validations', function(){
 			});
 			describe('- AM', function() {
 				var uf = 'AM';
-				it('should validate 99999999-0', function(done) {
-					should(BrV.ie(uf).validate('99999999-0')).be.true;
+				it('should validate 99.999.999-0', function(done) {
+					should(BrV.ie(uf).validate('99.999.999-0')).be.true;
 					done();
 				});
-				it('should validate 19871230-8', function(done) {
-					should(BrV.ie(uf).validate('19871230-8')).be.true;
+				it('should validate 19.871.230-8', function(done) {
+					should(BrV.ie(uf).validate('19.871.230-8')).be.true;
 					done();
 				});
-				it('should invalidate 99912999-0', function(done) {
-					should(BrV.ie(uf).validate('99912999-0')).be.false;
+				it('should invalidate 99.912.999-0', function(done) {
+					should(BrV.ie(uf).validate('99.912.999-0')).be.false;
 					done();
 				});
 			});
