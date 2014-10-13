@@ -85,6 +85,8 @@ gulp.task('default', ['jshint', 'build', 'runtestdot'], function() {
     gulp.watch(path.src.files, ['jshint', 'build', 'runtestdot']);
 });
 
-gulp.task('test', ['jshint', 'build', 'runtest'], function() {
+gulp.task('test', ['jshint', 'build', 'runtest']);
+
+gulp.task('test-watch', ['jshint', 'build', 'runtest'], function() {
     gulp.watch(path.src.files, ['jshint', 'build', 'runtest']);
 });
