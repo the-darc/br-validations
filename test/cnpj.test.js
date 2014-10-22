@@ -23,5 +23,13 @@ describe('br-validations', function(){
 			should(BrV.cnpj.validate('01.781.192/0001-20')).be.false;
 			done();
 		});
+		it('should not validate equal numbers sequence', function(done) {
+			var template = '##.###.###/####-##';
+			for (var i = 0; i < 10; i++) {
+				var cnpj = template.replace(/#/g,i);
+				should(BrV.cnpj.validate(cnpj)).be.false;
+			}
+			done();
+		});
 	});
 });

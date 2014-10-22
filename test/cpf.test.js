@@ -23,5 +23,13 @@ describe('br-validations', function(){
 			should(BrV.cpf.validate('143.515.120-13')).be.false;
 			done();
 		});
+		it('should not validate equal numbers sequence', function(done) {
+			var template = '###.###.###-##';
+			for (var i = 0; i < 10; i++) {
+				var cpf = template.replace(/#/g,i);
+				should(BrV.cpf.validate(cpf)).be.false;
+			}
+			done();
+		});
 	});
 });
