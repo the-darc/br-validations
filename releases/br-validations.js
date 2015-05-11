@@ -1,7 +1,7 @@
 /**
  * br-validations
  * A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others
- * @version v0.2.3
+ * @version v0.2.4
  * @link http://github.com/the-darc/br-validations
  * @license MIT
  */
