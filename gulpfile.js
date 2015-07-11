@@ -44,7 +44,8 @@ gulp.task('build', function(done) {
 		'	return {',
 		'		ie: IE,',
 		'		cpf: CPF,',
-		'		cnpj: CNPJ',
+		'		cnpj: CNPJ,',
+		'       pis: PIS',
 		'	};',
 		'}));'].join('\n');
 

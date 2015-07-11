@@ -20,7 +20,8 @@
     "validation",
     "cpf",
     "cnpj",
-    "inscrição estadual"
+    "inscrição estadual",
+	"pis pasep"
   ],
   "author": {
     "name": "Daniel Campos",
