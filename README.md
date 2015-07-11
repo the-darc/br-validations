@@ -57,3 +57,10 @@ See: [Conferência de Inscrições Estaduais](http://www.sintegra.gov.br/insc_es
 
 __Not implemented yet__
 
+### PIS/PASEP ###
+
+```javascript
+	var BrV = require('./br-validations');
+	var pis = '120.5825.883-7';
+	var isValid = BrV.pis.validate(pis);
+```
