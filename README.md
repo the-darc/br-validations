@@ -1,7 +1,7 @@
+# br-validations #
 [![NPM version](https://badge.fury.io/js/br-validations.svg)](http://badge.fury.io/js/br-validations)
 [![Build Status](https://travis-ci.org/the-darc/br-validations.svg?branch=master)](https://travis-ci.org/the-darc/br-validations)
-
-# br-validations #
+[![Coverage Status](https://coveralls.io/repos/the-darc/br-validations/badge.svg?branch=master&service=github)](https://coveralls.io/github/the-darc/br-validations?branch=master)
 
 A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others.
 
