@@ -64,3 +64,12 @@ __Not implemented yet__
 	var pis = '120.5825.883-7';
 	var isValid = BrV.pis.validate(pis);
 ```
+
+## Contributing
+
+We'd love for you to contribute to our source code! We just ask for you to: 
+
+ - Follow the commit conventions of [conventional-changelog](https://github.com/ajoslin/conventional-changelog) described in 
+[conventional-conventions](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
+ - Write tests for the new feature or bug fix that you are solving
+ - Ensure all tests pass before send the pull-request (Use: `$ gulp test-coverage`)

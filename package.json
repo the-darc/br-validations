@@ -1,6 +1,6 @@
 {
   "name": "br-validations",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others",
   "id": "/br-validations",
   "main": "releases/br-validations.js",
@@ -31,6 +31,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "conventional-changelog": "0.0.17",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.3.4",
     "gulp-coveralls": "^0.1.4",
