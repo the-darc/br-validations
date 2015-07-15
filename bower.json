@@ -1,6 +1,6 @@
 {
   "name": "br-validations",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others",
   "homepage": "http://github.com/the-darc/br-validations",
   "repository": {
