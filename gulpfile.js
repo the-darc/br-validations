@@ -98,7 +98,7 @@ gulp.task('test-watch', ['jshint', 'build', 'runtest'], function() {
     gulp.watch(config.src.files, ['jshint', 'build', 'runtest']);
 });
 
-gulp.task('test-coverage', function(done) {
+gulp.task('test-coverage', ['jshint'], function(done) {
 	gulp.src(config.src.release)
 	.pipe(plugins.istanbul())
 	.pipe(plugins.istanbul.hookRequire())

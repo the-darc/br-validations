@@ -13,7 +13,8 @@
     "url": "https://github.com/the-darc/br-validations/issues"
   },
   "scripts": {
-    "test": "gulp test-coverage"
+    "test": "gulp test-coverage",
+    "postinstall": "gulp build"
   },
   "keywords": [
     "validator",
@@ -30,7 +31,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.7.0",
+    "gulp": "^3.9.0",
     "gulp-concat": "^2.3.4",
     "gulp-coveralls": "^0.1.4",
     "gulp-footer": "^1.0.5",
