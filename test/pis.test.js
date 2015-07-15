@@ -1,5 +1,5 @@
 var should = require('should'),
-	BrV = require('../releases/br-validations.min');
+	BrV = require('../releases/br-validations');
 
 describe('br-validations', function(){
 	describe('PIS ', function() {
@@ -15,12 +15,20 @@ describe('br-validations', function(){
 			should(BrV.pis.validate('120.6505.135-5')).be.true;
 			done();
 		});
+		it('should validate 12065051355', function(done) {
+			should(BrV.pis.validate('12065051355')).be.true;
+			done();
+		});
 		it('should not validate 124.3302.435-1', function(done) {
 			should(BrV.pis.validate('124.3302.435-1')).be.false;
 			done();
 		});
 		it('should not validate 120.6505.135-4', function(done) {
 			should(BrV.pis.validate('120.6505.135-4')).be.false;
+			done();
+		});
+		it('should not validate 120.6505.135-a', function(done) {
+			should(BrV.pis.validate('120.6505.135-a')).be.false;
 			done();
 		});
 	});

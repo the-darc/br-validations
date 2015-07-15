@@ -1,6 +1,6 @@
 {
   "name": "br-validations",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others",
   "id": "/br-validations",
   "main": "releases/br-validations.js",
@@ -13,7 +13,8 @@
     "url": "https://github.com/the-darc/br-validations/issues"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test-coverage",
+    "postinstall": "gulp build"
   },
   "keywords": [
     "validator",
@@ -21,7 +22,7 @@
     "cpf",
     "cnpj",
     "inscrição estadual",
-	"pis pasep"
+    "pis pasep"
   ],
   "author": {
     "name": "Daniel Campos",
@@ -30,10 +31,13 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.7.0",
+    "conventional-changelog": "0.0.17",
+    "gulp": "^3.9.0",
     "gulp-concat": "^2.3.4",
+    "gulp-coveralls": "^0.1.4",
     "gulp-footer": "^1.0.5",
     "gulp-header": "^1.0.5",
+    "gulp-istanbul": "^0.10.0",
     "gulp-jshint": "^1.6.1",
     "gulp-load-plugins": "^0.5.3",
     "gulp-mocha": "^1.0.0",
