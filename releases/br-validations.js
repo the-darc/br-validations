@@ -1,7 +1,7 @@
 /**
  * br-validations
  * A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others
- * @version v0.2.4
+ * @version v0.3.0
  * @link http://github.com/the-darc/br-validations
  * @license MIT
  */
@@ -662,10 +662,27 @@ PIS.validate = function(pis) {
 	return Number(pisd) === calculateDigit(pisi);
 };
 
+var RG = {};
+
+RG.validate = function(rg){
+  rg = rg.split('');
+  var vd;
+  var multiplier = 2;
+  var total = 0;
+
+  for (var i = 0; i < rg.length - 1; i++) {
+    total += rg[i] * multiplier;
+    multiplier += 1;
+  }
+
+  vd = 11 - total % 11;
+  return  (parseInt(rg[rg.length - 1]) === vd);
+};
 	return {
 		ie: IE,
 		cpf: CPF,
 		cnpj: CNPJ,
-		pis: PIS
+		pis: PIS,
+   rg: RG
 	};
 }));
