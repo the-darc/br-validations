@@ -55,7 +55,11 @@ See: [Conferência de Inscrições Estaduais](http://www.sintegra.gov.br/insc_es
 
 ### RG ###
 
-__Not implemented yet__
+```javascript
+	var Brv = require('./br-validations');
+	var rg = '418757896';
+	var isValid = Brv.rg.validate(rg);
+```
 
 ### PIS/PASEP ###
 

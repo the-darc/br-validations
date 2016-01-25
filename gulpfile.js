@@ -48,7 +48,8 @@ gulp.task('build', function(done) {
 		'		ie: IE,',
 		'		cpf: CPF,',
 		'		cnpj: CNPJ,',
-		'		pis: PIS',
+		'		pis: PIS,',
+		'		rg: RG',
 		'	};',
 		'}));'].join('\n');
 
