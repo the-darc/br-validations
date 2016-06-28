@@ -13,8 +13,7 @@
     "url": "https://github.com/the-darc/br-validations/issues"
   },
   "scripts": {
-    "test": "gulp test-coverage",
-    "postinstall": "gulp build"
+    "test": "gulp test-coverage"
   },
   "keywords": [
     "validator",
