@@ -3,9 +3,7 @@ var gulp = require('gulp'),
 	jshintReporter = require('jshint-stylish'),
 	plugins = require('gulp-load-plugins')({
 		config: path.join(__dirname, 'package.json')
-	}),
-	pkg = require('./package.json'),
-	fs = require('fs');
+	});
 
 var config = {
 	src: {
@@ -15,7 +13,7 @@ var config = {
 	test: {
 		files: 'test/**/*.test.js'
 	}
-}
+};
 
 gulp.task('build', function(done) {
 	var pkg = require('./package.json');
@@ -120,23 +118,5 @@ gulp.task('test-coverage', ['jshint'], function(done) {
 				done();
 			}
 		});
-	});
-});
-
-gulp.task('changelog', function(done) {
-	var changelog = require('conventional-changelog');
-
-	var options = {
-		repository: pkg.homepage,
-		version: pkg.version,
-		file: path.join(__dirname, 'CHANGELOG.md')
-	};
-
-	changelog(options, function(err, log) {
-		if (err) {
-			throw err;
-		}
-
-		fs.writeFile(options.file, log, done);
 	});
 });

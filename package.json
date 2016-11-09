@@ -13,7 +13,8 @@
     "url": "https://github.com/the-darc/br-validations/issues"
   },
   "scripts": {
-    "test": "gulp test-coverage"
+    "test": "gulp test-coverage",
+    "release": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "keywords": [
     "validator",
@@ -30,18 +31,19 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "conventional-changelog": "0.0.17",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.3.4",
+    "conventional-changelog": "1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
     "gulp-coveralls": "^0.1.4",
     "gulp-footer": "^1.0.5",
-    "gulp-header": "^1.0.5",
-    "gulp-istanbul": "^0.10.0",
-    "gulp-jshint": "^1.6.1",
-    "gulp-load-plugins": "^0.5.3",
-    "gulp-mocha": "^1.0.0",
-    "gulp-uglify": "^0.3.2",
-    "jshint-stylish": "^0.2.0",
-    "should": "^4.0.1"
+    "gulp-header": "^1.8.8",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jshint": "^2.0.2",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-mocha": "^3.0.1",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "should": "^11.1.1"
   }
 }
