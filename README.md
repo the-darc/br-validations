@@ -1,7 +1,12 @@
-# br-validations #
-[![NPM version](https://badge.fury.io/js/br-validations.svg)](http://badge.fury.io/js/br-validations)
-[![Build Status](https://travis-ci.org/the-darc/br-validations.svg?branch=master)](https://travis-ci.org/the-darc/br-validations)
-[![Coverage Status](https://coveralls.io/repos/the-darc/br-validations/badge.svg?branch=master&service=github)](https://coveralls.io/github/the-darc/br-validations?branch=master)
+br-validations
+==============
+[![npm version](https://img.shields.io/npm/v/br-validations.svg)](https://www.npmjs.com/package/br-validations) 
+[![Bower version](https://img.shields.io/bower/v/br-validations.svg)](https://bower.io/search/?q=br-validations) 
+[![Build Status](https://travis-ci.org/the-darc/br-validations.svg)](https://travis-ci.org/the-darc/br-validations)
+[![Coverage Status](https://coveralls.io/repos/the-darc/br-validations/badge.svg)](https://coveralls.io/r/the-darc/br-validations)
+
+[![NPM](https://nodei.co/npm/br-validations.png?downloads=true&stars=true)](https://nodei.co/npm/br-validations/)
+
 
 A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others.
 

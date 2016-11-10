@@ -116,9 +116,6 @@ function validateDV(value, options) {
 }
 
 function validateIE(value, rule) {
-	if (rule.match && !rule.match.test(value)) {
-		return false;
-	}
 	for (var i = 0; i < rule.dvs.length; i++) {
 		// console.log('>> >> dv'+i);
 		if (!validateDV(value, rule.dvs[i])) {
@@ -342,7 +339,7 @@ IErules.RO = [{
 	dvs: [{
 		dvpos: 13,
 		pesos: [6,5,4,3,2,9,8,7,6,5,4,3,2],
-		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11v2']
 	}],
 	validate: function(value) { return validateIE(value, this); }
 }];

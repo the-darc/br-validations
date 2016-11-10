@@ -1,11 +1,12 @@
 /**
  * br-validations
  * A library of validations applicable to several Brazilian data like I.E., CNPJ, CPF and others
- * @version v0.2.4
+ * @version v0.3.0
  * @link http://github.com/the-darc/br-validations
  * @license MIT
  */
 (function (root, factory) {
+	/* istanbul ignore next */
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define([], factory);
@@ -216,9 +217,6 @@ function validateDV(value, options) {
 }
 
 function validateIE(value, rule) {
-	if (rule.match && !rule.match.test(value)) {
-		return false;
-	}
 	for (var i = 0; i < rule.dvs.length; i++) {
 		// console.log('>> >> dv'+i);
 		if (!validateDV(value, rule.dvs[i])) {
@@ -442,7 +440,7 @@ IErules.RO = [{
 	dvs: [{
 		dvpos: 13,
 		pesos: [6,5,4,3,2,9,8,7,6,5,4,3,2],
-		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11']
+		algorithmSteps: ['onlyNumbers', 'normalSum', 'mod11', 'minusRestOf11v2']
 	}],
 	validate: function(value) { return validateIE(value, this); }
 }];
