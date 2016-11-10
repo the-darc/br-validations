@@ -26,6 +26,7 @@ gulp.task('build', function(done) {
 		' * @license <%= pkg.license %>',
 		' */',
 		'(function (root, factory) {',
+		'	/* istanbul ignore next */',
 		'	if (typeof define === \'function\' && define.amd) {',
 		'		// AMD. Register as an anonymous module.',
 		'		define([], factory);',

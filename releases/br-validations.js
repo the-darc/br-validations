@@ -6,6 +6,7 @@
  * @license MIT
  */
 (function (root, factory) {
+	/* istanbul ignore next */
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define([], factory);
@@ -216,9 +217,6 @@ function validateDV(value, options) {
 }
 
 function validateIE(value, rule) {
-	if (rule.match && !rule.match.test(value)) {
-		return false;
-	}
 	for (var i = 0; i < rule.dvs.length; i++) {
 		// console.log('>> >> dv'+i);
 		if (!validateDV(value, rule.dvs[i])) {

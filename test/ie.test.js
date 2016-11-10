@@ -274,7 +274,7 @@ describe('br-validations', function(){
 					done();
 				});
 			});
-			describe.only('- RO', function() {
+			describe('- RO', function() {
 				var uf = 'RO';
 				it('should validate 0000000062521-3', function(done) {
 					should(BrV.ie(uf).validate('0000000062521-3')).be.true();
@@ -592,6 +592,22 @@ describe('br-validations', function(){
 				});
 				it('should validate 037123459', function(done) {
 					should(BrV.ie(uf).validate('037123459')).be.true();
+					done();
+				});
+				it('should validate 038608910', function(done) {
+					should(BrV.ie(uf).validate('038608910')).be.true();
+					done();
+				});
+				it('should validate 030177041', function(done) {
+					should(BrV.ie(uf).validate('030177041')).be.true();
+					done();
+				});
+				it('should validate 030077090', function(done) {
+					should(BrV.ie(uf).validate('030077090')).be.true();
+					done();
+				});
+				it('should invalidate 040077098', function(done) {
+					should(BrV.ie(uf).validate('040077098')).be.false();
 					done();
 				});
 				it('should invalidate 031123459', function(done) {

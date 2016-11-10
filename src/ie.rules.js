@@ -116,9 +116,6 @@ function validateDV(value, options) {
 }
 
 function validateIE(value, rule) {
-	if (rule.match && !rule.match.test(value)) {
-		return false;
-	}
 	for (var i = 0; i < rule.dvs.length; i++) {
 		// console.log('>> >> dv'+i);
 		if (!validateDV(value, rule.dvs[i])) {
