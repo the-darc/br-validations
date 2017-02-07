@@ -38,7 +38,7 @@ A library of validations applicable to several Brazilian data like I.E., CNPJ, C
 	var BrV = require('./br-validations');
 	var uf = 'PE';
 	var ie = '1321418-40';
-	var isValid = BrV.ie(uf).validate(ie);
+	var isValid = BrV.ie.validate(ie);
 ```
 See: [Conferência de Inscrições Estaduais](http://www.sintegra.gov.br/insc_est.html)
 
@@ -55,7 +55,7 @@ See: [Conferência de Inscrições Estaduais](http://www.sintegra.gov.br/insc_es
 ```javascript
 	var BrV = require('./br-validations');
 	var cnpj = '10.157.471/0001-61';
-	var isValid = BrV.cnpj(uf).validate(cnpj);
+	var isValid = BrV.cnpj.validate(cnpj);
 ```
 
 ### RG ###
