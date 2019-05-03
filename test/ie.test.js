@@ -482,6 +482,14 @@ describe('br-validations', function(){
 					should(BrV.ie(uf).validate('29010227836')).be.true();
 					done();
 				});
+				it('should validate 290227836', function(done) {
+					should(BrV.ie(uf).validate('290227836')).be.true();
+					done();
+				});
+				it('should invalidate 210227836', function(done) {
+					should(BrV.ie(uf).validate('210227836')).be.false();
+					done();
+				});
 				it('should invalidate 29010237336', function(done) {
 					should(BrV.ie(uf).validate('29010237336')).be.false();
 					done();
